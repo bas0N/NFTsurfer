@@ -1,32 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import Spinner from "../layout/Spinner";
 import TokenItem from "./TokenItem";
+import TokenContext from "../../context/tokens/TokensContext";
 
 function TokenResults() {
-  const [tokens, setTokens] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const fetchTokens = async () => {
-    setLoading(true);
-
-    const response = await fetch(
-      "https://api.nftport.xyz/v0/search?text=ape&chain=all&order_by=relevance",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: process.env.REACT_APP_API_KEY,
-        },
-      }
-    ).catch((err) => {
-      console.error(err);
-    });
-
-    const data = await response.json();
-    setTokens(data.search_results);
-    console.log(tokens);
-    setLoading(false);
-  };
+  const { tokens, loading, fetchTokens } = useContext(TokenContext);
 
   useEffect(() => {
     //fetchTokens();

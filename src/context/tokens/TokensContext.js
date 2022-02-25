@@ -1,15 +1,25 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
+import tokensReducer from "./TokensReducer";
 
 const TokenContext = createContext();
 
 //const TOKEN_URL =
-const TOKEN_TOKEN = process.env.REACT_APP_API_KEY;
+//const TOKEN_TOKEN = process.env.REACT_APP_API_KEY;
 
 export const TokenProvider = ({ children }) => {
-  const [tokens, setTokens] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const initialState = {
+    tokens: [],
+    loading: false,
+  };
+  const [state, dispatch] = useReducer(tokensReducer, initialState);
+  const setLoading = () => {
+    dispatch({
+      type: "SET_LOADING",
+    });
+  };
+
   const fetchTokens = async () => {
-    setLoading(true);
+    setLoading();
 
     const response = await fetch(
       "https://api.nftport.xyz/v0/search?text=ape&chain=all&order_by=relevance",
@@ -25,12 +35,16 @@ export const TokenProvider = ({ children }) => {
     });
 
     const data = await response.json();
-    setTokens(data.search_results);
-    console.log(tokens);
-    setLoading(false);
+    console.log(data);
+    dispatch({
+      type: "GET_TOKENS",
+      payload: data,
+    });
   };
   return (
-    <TokenContext.Provider value={{ tokens, loading, fetchTokens }}>
+    <TokenContext.Provider
+      value={{ tokens: state.tokens, loading: state.loading, fetchTokens }}
+    >
       {children}
     </TokenContext.Provider>
   );

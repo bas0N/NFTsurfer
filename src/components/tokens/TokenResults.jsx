@@ -1,10 +1,10 @@
 import { useEffect, useContext } from "react";
 import Spinner from "../layout/Spinner";
 import TokenItem from "./TokenItem";
-import TokenContext from "../../context/tokens/TokensContext";
+import TokensContext from "../../context/tokens/TokensContext";
 
 function TokenResults() {
-  const { tokens, loading, fetchTokens } = useContext(TokenContext);
+  const { tokens, loading, fetchTokens } = useContext(TokensContext);
 
   useEffect(() => {
     //fetchTokens();

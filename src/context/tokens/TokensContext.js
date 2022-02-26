@@ -18,11 +18,15 @@ export const TokenProvider = ({ children }) => {
     });
   };
 
-  const fetchTokens = async () => {
+  const searchTokens = async (text) => {
     setLoading();
 
+    const params = new URLSearchParams({
+      q: text,
+    });
+
     const response = await fetch(
-      "https://api.nftport.xyz/v0/search?text=ape&chain=all&order_by=relevance",
+      `https://api.nftport.xyz/v0/search?text=${text}&chain=all&page_size=10&order_by=relevance`,
       {
         method: "GET",
         headers: {
@@ -34,16 +38,16 @@ export const TokenProvider = ({ children }) => {
       console.error(err);
     });
 
-    const data = await response.json();
-    console.log(data);
+    const { search_results } = await response.json();
+    console.log(search_results);
     dispatch({
       type: "GET_TOKENS",
-      payload: data,
+      payload: search_results,
     });
   };
   return (
     <TokenContext.Provider
-      value={{ tokens: state.tokens, loading: state.loading, fetchTokens }}
+      value={{ tokens: state.tokens, loading: state.loading, searchTokens }}
     >
       {children}
     </TokenContext.Provider>

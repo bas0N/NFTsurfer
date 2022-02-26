@@ -6,10 +6,6 @@ import TokensContext from "../../context/tokens/TokensContext";
 function TokenResults() {
   const { tokens, loading, fetchTokens } = useContext(TokensContext);
 
-  useEffect(() => {
-    //fetchTokens();
-  }, []);
-
   const tok = {
     cached_file_url:
       "https://i.insider.com/6123e07e4932030018457fb7?width=1136&format=jpeg",
@@ -19,12 +15,10 @@ function TokenResults() {
   };
   if (!loading) {
     return (
-      <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
-        <TokenItem token={tok} />
-        <TokenItem token={tok} />
-        <TokenItem token={tok} />
-        <TokenItem token={tok} />
-        <TokenItem token={tok} />
+      <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 my-8">
+        {tokens.map((token) => (
+          <TokenItem token={token} />
+        ))}
       </div>
     );
   } else {
@@ -33,3 +27,4 @@ function TokenResults() {
 }
 
 export default TokenResults;
+// <TokenItem token={tok} />

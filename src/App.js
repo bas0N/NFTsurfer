@@ -10,14 +10,16 @@ function App() {
   return (
     <TokenProvider>
       <Router>
-        <div className="flex flex-col justify-between h-screen bg-slate-200 text-gray-800">
+        <div className="flex flex-col justify-between h-auto bg-slate-200 text-gray-800">
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/notfound" element={<NotFound />} />
-            <Route path="/*" element={<NotFound />} />
-          </Routes>
+          <main className="container mx-auto ">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/notfound" element={<NotFound />} />
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
+          </main>
           <Footer />
         </div>
       </Router>

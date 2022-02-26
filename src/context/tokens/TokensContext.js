@@ -17,7 +17,11 @@ export const TokenProvider = ({ children }) => {
       type: "SET_LOADING",
     });
   };
-
+  const clearTokens = () => {
+    dispatch({
+      type: "CLEAR_TOKENS",
+    });
+  };
   const searchTokens = async (text) => {
     setLoading();
 
@@ -47,7 +51,12 @@ export const TokenProvider = ({ children }) => {
   };
   return (
     <TokenContext.Provider
-      value={{ tokens: state.tokens, loading: state.loading, searchTokens }}
+      value={{
+        tokens: state.tokens,
+        loading: state.loading,
+        searchTokens,
+        clearTokens,
+      }}
     >
       {children}
     </TokenContext.Provider>

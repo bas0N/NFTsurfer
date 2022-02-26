@@ -11,6 +11,11 @@ const tokensReducer = (state, action) => {
         ...state,
         loading: true,
       };
+    case "CLEAR_TOKENS":
+      return {
+        ...state,
+        tokens: [],
+      };
 
     default:
       return state;

@@ -10,9 +10,9 @@ function App() {
   return (
     <TokenProvider>
       <Router>
-        <div className="flex flex-col justify-between h-auto bg-slate-200 text-gray-800">
+        <div className="flex flex-col justify-between	h-screen overflow-auto bg-slate-200 text-gray-800">
           <Navbar />
-          <main className="container mx-auto ">
+          <main className="container mx-auto my-8">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

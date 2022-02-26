@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import TokenContext from "../../context/tokens/TokensContext";
 function TokenSearch() {
-  const { tokens, searchTokens } = useContext(TokenContext);
+  const { tokens, searchTokens, clearTokens } = useContext(TokenContext);
   const [text, setText] = useState("");
   const handleChange = (e) => {
     setText(e.target.value);
@@ -40,7 +40,9 @@ function TokenSearch() {
       </div>
       {tokens.length > 0 && (
         <div>
-          <button className="btn btn-ghost btn-lg">Clear</button>
+          <button onClick={clearTokens} className="btn btn-ghost btn-lg">
+            Clear
+          </button>
         </div>
       )}
     </div>

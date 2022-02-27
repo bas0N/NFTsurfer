@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 function TokenItem({
-  token: { cached_file_url, name, token_id, description },
+  token: { cached_file_url, name, token_id, description, contract_address },
 }) {
   return (
     <div className="max-w-xs col-span-1 flex flex-col  overflow-auto rounded-md shadow-md dark:bg-coolGray-900 dark:text-coolGray-100">
@@ -16,7 +16,7 @@ function TokenItem({
           </h2>
           <p className="dark:text-coolGray-100 line-clamp-2">{description}</p>
         </div>
-        <Link className="" to={`/tokens/${token_id}`}>
+        <Link className="" to={`/token/${contract_address}/${token_id}`}>
           <button
             type="button"
             className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-violet-400 dark:text-coolGray-900"

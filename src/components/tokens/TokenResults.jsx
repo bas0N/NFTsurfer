@@ -16,8 +16,8 @@ function TokenResults() {
   if (!loading) {
     return (
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
-        {tokens.map((token) => (
-          <TokenItem token={token} />
+        {tokens.map((token, index) => (
+          <TokenItem key={index} token={token} />
         ))}
       </div>
     );

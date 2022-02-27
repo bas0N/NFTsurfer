@@ -9,6 +9,7 @@ const TokenContext = createContext();
 export const TokenProvider = ({ children }) => {
   const initialState = {
     tokens: [],
+    token: {},
     loading: false,
   };
   const [state, dispatch] = useReducer(tokensReducer, initialState);
@@ -22,6 +23,7 @@ export const TokenProvider = ({ children }) => {
       type: "CLEAR_TOKENS",
     });
   };
+  //find tokens by name
   const searchTokens = async (text) => {
     setLoading();
 
@@ -49,13 +51,45 @@ export const TokenProvider = ({ children }) => {
       payload: search_results,
     });
   };
+  //find single token
+  const findToken = async (contract, id) => {
+    setLoading();
+
+    const response = await fetch(
+      `https://api.nftport.xyz/v0/nfts/${contract}/${id}?chain=ethereum`,
+
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: process.env.REACT_APP_API_KEY,
+        },
+      }
+    ).catch((err) => {
+      console.error(err);
+      console.log("elllllo");
+    });
+    if (response.status === 404) {
+      window.location = "/notfound";
+    } else {
+      const data = await response.json();
+
+      console.log(data);
+      dispatch({
+        type: "GET_TOKEN",
+        payload: data,
+      });
+    }
+  };
   return (
     <TokenContext.Provider
       value={{
         tokens: state.tokens,
         loading: state.loading,
+        token: state.token,
         searchTokens,
         clearTokens,
+        findToken,
       }}
     >
       {children}

@@ -6,6 +6,13 @@ const tokensReducer = (state, action) => {
         tokens: action.payload,
         loading: false,
       };
+    case "GET_TOKEN":
+      return {
+        ...state,
+        token: action.payload,
+        loading: false,
+      };
+
     case "SET_LOADING":
       return {
         ...state,

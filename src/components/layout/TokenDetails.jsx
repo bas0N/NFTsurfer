@@ -1,6 +1,23 @@
-function TokenDetails() {
+import { useEffect, useContext } from "react";
+function TokenDetails({ statistics }) {
+  // console.log(statistics);
+
+  const {
+    market_cap = 0,
+    num_owners = 0,
+    average_price = 0,
+    one_day_sales = 0,
+    total_minted = 0,
+    total_sales = 0,
+  } = statistics;
+
+  const validateInput = (input) => {
+    if (input === undefined || input === 0) {
+      return "No data";
+    }
+  };
   return (
-    <section className="p-4 my-6 md:p-8  bg-coolGray-800  text-coolGray-100">
+    <section className="p-4 my-6 md:p-8  bg-coolGray-800  text-red">
       <div className="container grid grid-cols-1 gap-6 m-4 mx-auto md:m-0 md:grid-cols-2 xl:grid-cols-3">
         <div className="flex overflow-hidden rounded-lg  bg-Gray-700  text-coolGray-100">
           <div className="flex items-center justify-center px-4  bg-purple-400  text-coolGray-800">
@@ -16,8 +33,8 @@ function TokenDetails() {
             </svg>
           </div>
           <div className="flex items-center justify-between flex-1 p-3">
-            <p className="text-2xl font-semibold">200+</p>
-            <p>Projects</p>
+            <p className="text-2xl font-semibold">{market_cap.toFixed(2)}</p>
+            <p>Market Cap</p>
           </div>
         </div>
         <div className="flex overflow-hidden rounded-lg  bg-coolGray-900  text-coolGray-100">
@@ -33,8 +50,8 @@ function TokenDetails() {
             </svg>
           </div>
           <div className="flex items-center justify-between flex-1 p-3">
-            <p className="text-2xl font-semibold">7 500+</p>
-            <p>Customers</p>
+            <p className="text-2xl font-semibold">{num_owners}</p>
+            <p>Number of owners</p>
           </div>
         </div>
         <div className="flex overflow-hidden rounded-lg  bg-coolGray-900  text-coolGray-100">
@@ -50,8 +67,8 @@ function TokenDetails() {
             </svg>
           </div>
           <div className="flex items-center justify-between flex-1 p-3">
-            <p className="text-2xl font-semibold">14</p>
-            <p>Awards</p>
+            <p className="text-2xl font-semibold">{one_day_sales}</p>
+            <p>One day sales</p>
           </div>
         </div>
         <div className="flex overflow-hidden rounded-lg  bg-coolGray-900  text-coolGray-100">
@@ -67,8 +84,8 @@ function TokenDetails() {
             </svg>
           </div>
           <div className="flex items-center justify-between flex-1 p-3">
-            <p className="text-2xl font-semibold">24/7 h</p>
-            <p>Support</p>
+            <p className="text-2xl font-semibold">{total_minted}</p>
+            <p>Total Minted</p>
           </div>
         </div>
         <div className="flex overflow-hidden rounded-lg  bg-coolGray-900  text-coolGray-100">
@@ -84,8 +101,8 @@ function TokenDetails() {
             </svg>
           </div>
           <div className="flex items-center justify-between flex-1 p-3">
-            <p className="text-2xl font-semibold">99,9 %</p>
-            <p>Uptime</p>
+            <p className="text-2xl font-semibold">{total_sales}</p>
+            <p>Total Sales</p>
           </div>
         </div>
         <div className="flex overflow-hidden rounded-lg  bg-coolGray-900  text-coolGray-100">
@@ -101,8 +118,8 @@ function TokenDetails() {
             </svg>
           </div>
           <div className="flex items-center justify-between flex-1 p-3">
-            <p className="text-2xl font-semibold">720 L</p>
-            <p>Coffee</p>
+            <p className="text-2xl font-semibold">{average_price.toFixed(6)}</p>
+            <p>Average price</p>
           </div>
         </div>
       </div>

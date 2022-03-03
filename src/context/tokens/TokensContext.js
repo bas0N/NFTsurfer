@@ -81,15 +81,51 @@ export const TokenProvider = ({ children }) => {
       });
     }
   };
+
+  //get transaction data
+  const getTransactions = async (contract) => {
+    console.log(contract);
+    setLoading();
+
+    const response = await fetch(
+      `https://api.nftport.xyz/v0/transactions/stats/${contract}?chain=ethereum`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: process.env.REACT_APP_API_KEY,
+        },
+      }
+    ).catch((err) => {
+      console.error(err);
+      console.log("elllllo");
+    });
+    console.log(response.status);
+    if (response.status === 404) {
+      window.location = "/notfound";
+    } else {
+      console.log("passed");
+      const data = await response.json();
+
+      console.log(data);
+      dispatch({
+        type: "GET_STATISTICS",
+        payload: data.statistics,
+      });
+    }
+  };
+
   return (
     <TokenContext.Provider
       value={{
         tokens: state.tokens,
         loading: state.loading,
         token: state.token,
+        statistics: state.statistics,
         searchTokens,
         clearTokens,
         findToken,
+        getTransactions,
       }}
     >
       {children}

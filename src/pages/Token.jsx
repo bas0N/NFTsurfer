@@ -7,12 +7,14 @@ import TransactionTable from "../components/layout/TransactionTable";
 
 import TokenContext from "../context/tokens/TokensContext";
 function Token() {
-  const { findToken, token, loading } = useContext(TokenContext);
+  const { findToken, token, loading, getTransactions, statistics } =
+    useContext(TokenContext);
   const { nft, contract } = token;
 
   const params = useParams();
   useEffect(() => {
     findToken(params.contract, params.id);
+    getTransactions(params.contract);
   }, []);
   //place for spinner
   if (loading) {
@@ -32,18 +34,22 @@ function Token() {
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 mt-16 mb-8 md:gap-8 display-inline ">
           <div className=" flex border-solid  rounded-2xl justify-start			 ">
-            <img
-              src={nft.cached_file_url}
-              alt="Image"
-              className="rounded-lg h-72 object-contain"
-            ></img>
+            {nft !== undefined ? (
+              <img
+                src={nft.cached_file_url}
+                alt="Image"
+                className="rounded-lg h-72 object-contain"
+              ></img>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="col-span-2 h-72 bg-gray-400 rounded-2xl">
             <TransactionTable />
           </div>
         </div>
         <div className="bg-gray-400 rounded-2xl	">
-          <TokenDetails />
+          <TokenDetails statistics={statistics} />
         </div>
       </div>
     </>

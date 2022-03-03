@@ -38,6 +38,7 @@ function TokenSearch() {
           </div>
         </form>
       </div>
+      {tokens.length == undefined && console.log("something went wrong")}
       {tokens.length > 0 && (
         <div>
           <button onClick={clearTokens} className="btn btn-ghost btn-lg">

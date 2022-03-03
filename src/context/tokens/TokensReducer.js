@@ -23,6 +23,11 @@ const tokensReducer = (state, action) => {
         ...state,
         tokens: [],
       };
+    case "GET_STATISTICS":
+      return {
+        ...state,
+        statistics: action.payload,
+      };
 
     default:
       return state;

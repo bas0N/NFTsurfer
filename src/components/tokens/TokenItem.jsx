@@ -19,7 +19,7 @@ function TokenItem({
         <Link className="" to={`/token/${contract_address}/${token_id}`}>
           <button
             type="button"
-            className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-violet-400 dark:text-coolGray-900"
+            className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md text-teal-700 text-center border border-teal-700 rounded hover:bg-teal-700 hover:text-white active:bg-teal-700 focus:outline-none focus:ring"
           >
             Check
           </button>{" "}

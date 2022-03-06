@@ -1,6 +1,17 @@
 import { useEffect, useContext } from "react";
-function TokenDetails({ statistics }) {
-  // console.log(statistics);
+import { useParams } from "react-router-dom";
+
+import TokenContext from "../../context/tokens/TokensContext";
+
+function TokenDetails() {
+  const { getTransactions, statistics, setLoading, findToken } =
+    useContext(TokenContext);
+  const params = useParams();
+
+  useEffect(() => {
+    console.log("elo");
+    //getTransactions(params.contract);
+  }, []);
 
   const {
     market_cap = 0,

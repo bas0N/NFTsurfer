@@ -74,7 +74,7 @@ export const TokenProvider = ({ children }) => {
     } else {
       const data = await response.json();
 
-      console.log(data);
+      //console.log(data);
       dispatch({
         type: "GET_TOKEN",
         payload: data,
@@ -101,18 +101,16 @@ export const TokenProvider = ({ children }) => {
       console.log("elllllo");
     });
     console.log(response.status);
-    if (response.status === 404) {
-      window.location = "/notfound";
-    } else {
-      console.log("passed");
-      const data = await response.json();
 
-      console.log(data);
-      dispatch({
-        type: "GET_STATISTICS",
-        payload: data.statistics,
-      });
-    }
+    console.log("passed");
+    const data = await response.json();
+
+    //console.log(data);
+    //console.log("elo from context");
+    dispatch({
+      type: "GET_STATISTICS",
+      payload: data.statistics,
+    });
   };
 
   return (
@@ -126,6 +124,7 @@ export const TokenProvider = ({ children }) => {
         clearTokens,
         findToken,
         getTransactions,
+        setLoading,
       }}
     >
       {children}

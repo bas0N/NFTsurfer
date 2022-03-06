@@ -10,7 +10,7 @@ function Token() {
   const { findToken, token, loading, getTransactions, statistics } =
     useContext(TokenContext);
   const { nft, contract } = token;
-
+  console.log(token);
   const params = useParams();
   useEffect(() => {
     findToken(params.contract, params.id);
@@ -49,7 +49,7 @@ function Token() {
           </div>
         </div>
         <div className="bg-gray-400 rounded-2xl	">
-          <TokenDetails statistics={statistics} />
+          <TokenDetails />
         </div>
       </div>
     </>
